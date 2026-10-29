@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10213f">
+  <meta name="description" content="A responsive laptop inspection checklist and battery health calculator for used laptop buyers.">
+  <title>Laptop Buying Assistant</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Laptop Buying Assistant home">
+      <span class="brand-icon" aria-hidden="true">💻</span>
+      <span><strong>Laptop Buying Assistant</strong><small>Checklist, specifications & battery health calculator</small></span>
+    </a>
+    <a class="github-link" href="https://github.com/new" target="_blank" rel="noreferrer">◉ <span>Host on GitHub</span></a>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar">
+      <nav aria-label="Main navigation">
+        <a class="nav-link active" href="#home">⌂ <span>Home</span></a>
+        <a class="nav-link" href="#specifications">▣ <span>Specifications</span></a>
+        <a class="nav-link" href="#checklist">☑ <span>Buying checklist</span></a>
+        <a class="nav-link" href="#battery">▣ <span>Battery calculator</span></a>
+        <a class="nav-link" href="#gaming">🎮 <span>Gaming guide</span></a>
+        <a class="nav-link" href="#tips">✦ <span>Tips & advice</span></a>
+        <a class="nav-link" href="#about">ⓘ <span>About</span></a>
+      </nav>
+      <div class="sidebar-note"><span>🚀</span><strong>Inspect before you buy!</strong><small>Take your time. Never pay before testing.</small></div>
+    </aside>
+
+    <main>
+      <section id="home" class="hero panel">
+        <div class="laptop-art" aria-hidden="true"><div class="screen"><span></span></div><div class="base"></div></div>
+        <div class="hero-copy">
+          <p class="eyebrow">USED LAPTOP INSPECTION TOOL</p>
+          <h1>Samsung Galaxy Book4</h1>
+          <p class="subtitle">Intel Core i5-1335U · 16 GB RAM · 512 GB SSD</p>
+          <div class="hero-tags"><span class="tag green">✓ Worth checking</span><span class="tag blue">Target price: ₹38,000</span></div>
+          <p class="muted small">Use this guide to inspect the laptop in person. Confirm the exact model and configuration with the seller.</p>
+        </div>
+      </section>
+
+      <section id="checklist" class="panel section-panel">
+        <div class="section-heading">
+          <div><p class="eyebrow">STEP-BY-STEP</p><h2>Inspection checklist</h2><p class="muted">Each item includes what to check and how to check it.</p></div>
+          <div class="progress-wrap"><strong id="progress-count">0 / 37</strong><div class="progress"><span id="progress-bar"></span></div></div>
+        </div>
+        <div id="checklist-groups" class="checklist-groups"></div>
+        <div class="checklist-actions"><button id="expand-all" class="button secondary">Expand all</button><button id="reset-checklist" class="button subtle">Reset checklist</button></div>
+      </section>
+
+      <section id="battery" class="panel battery-panel">
+        <div class="section-heading"><div><p class="eyebrow">BATTERY TEST</p><h2>Battery health calculator</h2><p class="muted">Enter the values from the Windows battery report. Values are usually shown in mWh.</p></div><span class="battery-icon">🔋</span></div>
+        <div class="battery-grid">
+          <div class="calculator">
+            <label for="design-capacity">Design capacity (mWh)<span class="hint" title="The battery's original rated capacity, as reported by Windows.">ⓘ</span></label>
+            <input id="design-capacity" type="number" min="1" step="1" placeholder="e.g. 54000" inputmode="numeric">
+            <p class="field-help">Find this under <strong>Installed batteries → Design Capacity</strong>.</p>
+            <label for="full-capacity">Full charge capacity (mWh)<span class="hint" title="Windows' current estimate of the amount the battery can hold when fully charged.">ⓘ</span></label>
+            <input id="full-capacity" type="number" min="1" step="1" placeholder="e.g. 48600" inputmode="numeric">
+            <p class="field-help">Find <strong>Full Charge Capacity</strong> in the same section.</p>
+            <button id="calculate" class="button primary full-width">Calculate battery health</button>
+            <button id="fill-example" class="text-button">Try example values</button>
+            <div id="calc-error" class="error-message" role="alert" hidden></div>
+          </div>
+          <div class="battery-result" aria-live="polite">
+            <div class="gauge" id="gauge"><div class="gauge-inner"><strong id="health-number">—%</strong><span>Battery health</span></div></div>
+            <span id="health-status" class="tag neutral">Enter readings</span>
+            <p id="health-message" class="result-message">Your result will appear here after you calculate.</p>
+            <div class="result-stats">
+              <div><span>Estimated capacity lost</span><strong id="capacity-lost">—</strong></div>
+              <div><span>Capacity difference</span><strong id="capacity-difference">—</strong></div>
+            </div>
+          </div>
+        </div>
+        <div class="how-to panel-inset">
+          <h3>How to generate the battery report</h3>
+          <ol>
+            <li>On the laptop, press <kbd>Win</kbd> + <kbd>R</kbd>, type <code>cmd</code>, and press Enter.</li>
+            <li>Type <code>powercfg /batteryreport</code> and press Enter.</li>
+            <li>Read the file path printed by Windows, then open <code>battery-report.html</code> in a browser.</li>
+            <li>Find <strong>Installed batteries</strong>. Copy Design Capacity and Full Charge Capacity into the calculator above.</li>
+          </ol>
+          <p class="caution">Note: the report is an estimate. Battery wear, temperature, recent charging and calibration can affect the reading. If possible, also test the laptop unplugged for 10–15 minutes.</p>
+        </div>
+        <div class="range-table">
+          <h3>Practical buying guide</h3>
+          <div class="range-row"><strong>90% or more</strong><span class="tag green">Excellent</span><span>Good sign; still test unplugged.</span></div>
+          <div class="range-row"><strong>80–89%</strong><span class="tag blue">Good</span><span>Usually reasonable for a used laptop.</span></div>
+          <div class="range-row"><strong>70–79%</strong><span class="tag yellow">Negotiate</span><span>Consider a lower price.</span></div>
+          <div class="range-row"><strong>Below 70%</strong><span class="tag red">Caution</span><span>Battery replacement may be needed; avoid at full price.</span></div>
+          <p class="muted tiny">These are practical buyer guidelines, not official Samsung warranty thresholds.</p>
+        </div>
+      </section>
+
+      <section id="specifications" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">VERIFY BEFORE PAYMENT</p><h2>Target laptop specifications</h2><p class="muted">Use this as a reference, not proof of the seller's configuration.</p></div></div>
+        <div class="spec-grid">
+          <div class="spec-card"><span>Processor</span><strong>Intel Core i5-1335U</strong><small>13th Gen · 10 cores / 12 threads</small></div>
+          <div class="spec-card"><span>Memory</span><strong>16 GB LPDDR4x</strong><small>On-board / not upgradeable</small></div>
+          <div class="spec-card"><span>Storage</span><strong>512 GB SSD</strong><small>Verify capacity and health</small></div>
+          <div class="spec-card"><span>Display</span><strong>15.6-inch Full HD</strong><small>Check for dead pixels</small></div>
+          <div class="spec-card"><span>Weight</span><strong>About 1.55 kg</strong><small>Varies by configuration</small></div>
+          <div class="spec-card"><span>Battery</span><strong>About 54 Wh</strong><small>Check exact model specification</small></div>
+        </div>
+        <div class="info-callout"><strong>Important:</strong> Open <strong>Settings → System → About</strong> and verify processor and installed RAM. Check the exact model number on the bottom label and the invoice. Do not rely only on the seller's listing.</div>
+      </section>
+
+      <section id="gaming" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">REALISTIC EXPECTATIONS</p><h2>Gaming guide</h2><p class="muted">The Galaxy Book4 uses integrated graphics, unlike your ASUS RTX 3050 laptop.</p></div><span class="gaming-icon">🎮</span></div>
+        <div class="gaming-grid">
+          <article class="game-card"><span class="game-icon good">✓</span><div><h3>Light games & indie titles</h3><p>Usually the best fit. Start at 1080p with low or medium settings and check frame rate.</p></div></article>
+          <article class="game-card"><span class="game-icon caution">!</span><div><h3>Older 3D games / GTA V</h3><p>May run with reduced settings, but performance varies by game version, RAM configuration and cooling.</p></div></article>
+          <article class="game-card"><span class="game-icon no">×</span><div><h3>New demanding AAA games</h3><p>Not recommended. Integrated graphics are significantly weaker than the RTX 3050.</p></div></article>
+        </div>
+        <p class="muted small">Best test: run a game you actually play for 10 minutes while plugged in, then watch for stutter, fan noise and overheating.</p>
+      </section>
+
+      <section id="tips" class="panel section-panel">
+        <div class="section-heading"><div><p class="eyebrow">BUYER SAFETY</p><h2>Tips before you pay</h2></div></div>
+        <ul class="tips-list">
+          <li>Ask for the original purchase invoice and check warranty status using the serial number through official support.</li>
+          <li>Check for BIOS passwords, company management or organization enrollment. If the laptop is managed by an employer or school, do not buy until the seller proves it can be released.</li>
+          <li>Make sure the serial number on the laptop matches the invoice where possible.</li>
+          <li>Test charger, Wi-Fi, webcam, microphone, speakers, keyboard, touchpad and every port.</li>
+          <li>Do not pay an advance before inspecting the actual device. Get a receipt with model, serial number, price and date.</li>
+          <li>Before final payment, ask the seller to remove their accounts and let you confirm Windows setup can start normally.</li>
+        </ul>
+        <div class="price-callout"><span>💰</span><div><strong>Your planned deal</strong><p>Sell ASUS for ₹48,000 − buy Samsung for ₹38,000 = <strong>₹10,000 left</strong>. Treat ₹48,000 as a target, not a guaranteed sale price.</p></div></div>
+      </section>
+
+      <section id="about" class="panel section-panel about-section">
+        <h2>About this tool</h2>
+        <p>This is a client-side checklist and calculator for inspecting a used laptop. Checklist progress is saved in this browser using local storage. Battery readings are processed locally on this page and are not uploaded anywhere.</p>
+        <p class="muted small">Open-source starter project: edit the HTML, CSS and JavaScript, then publish the repository with GitHub Pages.</p>
+      </section>
+    </main>
+  </div>
+  <footer><span>Made for smarter second-hand laptop buying</span><a href="#home">Back to top ↑</a></footer>
+  <script src="script.js"></script>
+</body>
+</html>
